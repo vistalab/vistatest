@@ -29,6 +29,10 @@ epi_file     = fullfile(nifti_path, 'epi01.nii.gz');
 inplane_file = fullfile(nifti_path, 'inplane.nii.gz'); 
 anat_file    = fullfile(nifti_path, 't1.nii.gz'); 
 
+%testFile = '/home/aspanu/matlab/svn/vistadata/functional/Initialization/T1_Inplane.nii.gz';
+
+%inplane_file = testFile;
+
 % Make the sessiondir in the system-defined tempdir:  
 sess_path = fullfile(tempdir,'mrSession');
 
