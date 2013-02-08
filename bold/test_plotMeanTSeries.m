@@ -11,7 +11,7 @@ function test_plotMeanTSeries
 % RETURNS
 %  No returns
 %
-% Example: test_getCurDataROI()
+% Example: test_plotMeanTSeries()
 %
 % See also MRVTEST
 %
