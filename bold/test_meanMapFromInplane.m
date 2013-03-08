@@ -19,7 +19,7 @@ function test_meanMapFromInplane
 
 %% Initialize the key variables and data path
 % Data directory (where the mrSession file is located)
-dataDir = fullfile(mrvDataRootPath,'functional','vwfaLoc');
+dataDir = fullfile(mrvDataRootPath,'functional','mrBOLD_01');
 
 % This is the validation file
 vFile = fullfile(mrvDataRootPath,'validate','meanMapFromInplane');
@@ -32,7 +32,7 @@ storedmeanMap = load(vFile);
 % val.max   = max(map(:));
 % val.min   = min(map(:));
 % val.med   = nanmedian(map(:));
-% save(vFile, '-struct', 'val')
+% save(vFile, '-struct', 'val');
 
 
 %% Retain original directory, change to data directory

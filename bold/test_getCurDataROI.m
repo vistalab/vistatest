@@ -19,20 +19,20 @@ function test_getCurDataROI
 
 %% Initialize the key variables and data path
 % Data directory (where the mrSession file is located)
-dataDir = fullfile(mrvDataRootPath,'functional','vwfaLoc');
+dataDir = fullfile(mrvDataRootPath,'functional','mrBOLD_01');
 
 % This is the validation file
 vFile = fullfile(mrvDataRootPath,'validate','getCurDataROIfromINPLANE');
 storedROIdata = load(vFile);
 
 % These are the items we stored in the validation file
-%
-% val.codim      = size(c);
+% 
+% val.codim      = size(co);
 % val.comn       = nanmean(co);
-% val.indsdim    = size(inds)
+% val.indsdim    = size(inds);
 % val.cosample   = co(100);
 % val.indssample = inds(100);
-%
+% 
 % save(vFile, '-struct', 'val')
 
 %% Retain original directory, change to data directory

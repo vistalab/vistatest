@@ -38,11 +38,58 @@ function test_viewGetHidden
 
 %% Initialize the key variables and data path
 % Data directory (where the mrSession file is located)
-dataDir = fullfile(mrvDataRootPath,'functional','vwfaLoc');
+dataDir = fullfile(mrvDataRootPath,'functional','mrBOLD_01');
 
 % This is the validation file
 vFile = fullfile(mrvDataRootPath,'validate','viewGetHidden');
 stored = load(vFile);
+%
+% [pth, tmp]  = fileparts(viewGet(vw, 'Home Directory')); %#ok<ASGLU>\
+% stored.homedir        = length(tmp);
+% stored.sessionName    = length(viewGet(vw, 'session name'));
+% stored.subject        = length(viewGet(vw, 'subject'))
+% stored.name           = length(viewGet(vw, 'name'))
+% stored.annotation = length(viewGet(vw, 'annotation', 1));
+% stored.annotations = numel(viewGet(vw, 'annotations')); 
+% stored.viewtype = length(viewGet(vw, 'View Type'));
+% stored.subdir = length(viewGet(vw, 'subdir'));
+% stored.curscan = viewGet(vw, 'curscan');
+% stored.curslice = viewGet(vw, 'current slice');
+% stored.nscans = viewGet(vw, 'num scans');
+% stored.nslices = viewGet(vw, 'num slices');
+% stored.dtname = length(viewGet(vw, 'dt name'));
+% stored.curdt = viewGet(vw, 'current dt');
+% stored.dtstruct = numel(fieldnames(viewGet(vw, 'dtstruct')));
+% tmp       =  viewGet(vw, 'coherence');
+% stored.coherence = nanmean(tmp{1}(:));
+% tmp       =  viewGet(vw, 'scanco');
+% stored.scanco = nanmean(tmp(:));
+% tmp       =  viewGet(vw, 'phase');
+% stored.phase = nanmean(tmp{1}(:));
+% tmp       =  viewGet(vw, 'scanph');
+% stored.scanph = nanmean(tmp(:));
+% tmp       =  viewGet(vw, 'amplitude');
+% stored.amplitude = nanmean(tmp{1}(:));
+% tmp       =  viewGet(vw, 'scanamp');
+% stored.scanamp = nanmean(tmp(:));
+% vw = viewSet(vw, 'reference phase', pi);
+% stored.refph = viewGet(vw, 'reference phase');
+% vw = viewSet(vw, 'cothresh', .1);
+% stored.cothresh = viewGet(vw, 'cothresh');
+% vw = viewSet(vw, 'phasewin', [pi/4 3*pi/4]);
+% stored.phasewin = viewGet(vw, 'phasewin');
+% stored.twparams = viewGet(vw, 'twparams');
+% vw=loadMeanMap(vw);
+% tmp       =  viewGet(vw, 'map');
+% stored.map = nanmean(tmp{1}(:));
+% tmp       =  viewGet(vw, 'scanmap');
+% stored.scanmap = nanmean(tmp(:));
+% stored.mapwin = viewGet(vw, 'mapwin');
+% stored.mapname = length(viewGet(vw, 'mapname'));
+% stored.mapunits = length(viewGet(vw, 'mapunits'));
+% stored.mapclip = viewGet(vw, 'mapclip');
+% save(vFile, '-struct',  'stored')
+
 
 %% Retain original directory, change to data directory
 curDir = pwd;
@@ -72,13 +119,14 @@ assertEqual(stored.name, length(viewGet(vw, 'name')));
 
 % annotation
 %   This is empty in the sample data set so we must set it first
-dt   = viewGet(vw, 'dt struct');
-dt = dtSet(dt, 'annotation', 'my first scan', 1);
-dt = dtSet(dt, 'annotation', 'my second scan', 2);
-dt = dtSet(dt, 'annotation', 'my third scan', 3);
+dt = viewGet(vw, 'dt struct');
+
+for scan = 1:viewGet(vw, 'num scans')
+    dt = dtSet(dt, 'annotation', sprintf('scan %d', scan), scan);
+end
 dtnum = viewGet(vw, 'current dt');
 dataTYPES(dtnum) = dt;
-assertEqual(stored.annotation, length(viewGet(vw, 'annotation', 1)));
+ assertEqual(stored.annotation, length(viewGet(vw, 'annotation', 1)));
 
 % annotations
 assertEqual(stored.annotations, numel(viewGet(vw, 'annotations'))); 
@@ -100,9 +148,6 @@ assertEqual(stored.nscans, viewGet(vw, 'num scans'));
 
 % n slices
 assertEqual(stored.nslices, viewGet(vw, 'num slices'));
-
-% montage slices  (empty in hidden view)
-assertEqual(stored.montageslices, viewGet(vw, 'montage slices'));
 
 % dt name
 assertEqual(stored.dtname, length(viewGet(vw, 'dt name')));

@@ -20,7 +20,7 @@ function test_detrendTSeries
 
 % Seed random stream. This will be used to generate a simulated tseries.
 s = RandStream('mt19937ar','Seed',1);
-RandStream.setDefaultStream(s);
+RandStream.setGlobalStream(s);
 
 % Generate a time series (300 points, with some smoothing)
 ts = single(imblur(randn(300,1), 5));

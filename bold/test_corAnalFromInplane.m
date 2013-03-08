@@ -19,14 +19,14 @@ function test_corAnalFromInplane
 
 %% Initialize the key variables and data path
 % Data directory (where the mrSession file is located)
-dataDir = fullfile(mrvDataRootPath,'functional','vwfaLoc');
+dataDir = fullfile(mrvDataRootPath,'functional','mrBOLD_01');
 
 % This is the validation file
 vFile = fullfile(mrvDataRootPath,'validate','coranalFromInplane');
 storedCorAnal = load(vFile);
 
 % These are the items we stored in the validation file
-%
+% 
 % val.dim    = size(coSeries);
 % val.comn   = nanmean(coSeries);
 % val.ampmn  = nanmean(ampSeries);

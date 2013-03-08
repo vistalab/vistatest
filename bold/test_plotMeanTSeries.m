@@ -19,7 +19,7 @@ function test_plotMeanTSeries
 
 %% Initialize the key variables and data path
 % Data directory (where the mrSession file is located)
-dataDir = fullfile(mrvDataRootPath,'functional','vwfaLoc');
+dataDir = fullfile(mrvDataRootPath,'functional','mrBOLD_01');
 
 % This is the validation file
 vFile = fullfile(mrvDataRootPath,'validate','plotMeanTSeriesFromINPLANE');
@@ -37,7 +37,7 @@ val = load(vFile);
 % val.rawMd       = median(d.raw.tSeries);
 % val.rawMx       = max(d.raw.tSeries);
 % val.rawMin      = min(d.raw.tSeries);
-%
+% 
 % save(vFile, '-struct', 'val')
 
 %% Retain original directory, change to data directory
