@@ -30,8 +30,6 @@ epi_file{2}     = fullfile(nifti_path,'Raw','fMRI_run01.nii.gz');
 inplane_file = fullfile(nifti_path,'Raw','T1_Inplane.nii.gz'); 
 anat_file    = fullfile(nifti_path, '3DAnatomy', 't1.nii.gz');
 
-%testFile = '/home/aspanu/matlab/svn/vistadata/functional/Initialization/T1_Inplane.nii.gz';
-
 % Make the sessiondir in the system-defined tempdir:  
 sess_path = fullfile(tempdir,'mrSession');
 %sess_path = nifti_path;
