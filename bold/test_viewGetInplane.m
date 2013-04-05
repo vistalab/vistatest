@@ -20,7 +20,7 @@ function test_viewGetInplane
 
 %% Initialize the key variables and data path
 % Data directory (where the mrSession file is located)
-dataDir = fullfile(mrvDataRootPath,'functional','vwfaLoc');
+dataDir = fullfile(mrvDataRootPath,'functional','mrBOLD_01');
 
 % This is the validation file (note that this is the same validation file
 % used for the test file test_viewGetHidden)
@@ -56,9 +56,9 @@ assertEqual(stored.subject, length(viewGet(vw, 'subject')));
 % annotation
 %   This is empty in the sample data set so we must set it first
 dt = viewGet(vw, 'dt struct');
-dt = dtSet(dt, 'annotation', 'my first scan', 1);
-dt = dtSet(dt, 'annotation', 'my second scan', 2);
-dt = dtSet(dt, 'annotation', 'my third scan', 3);
+for scan = 1:viewGet(vw, 'num scans')
+    dt = dtSet(dt, 'annotation', sprintf('scan %d', scan), scan);
+end
 dtnum = viewGet(vw, 'current dt');
 dataTYPES(dtnum) = dt; %#ok<NASGU>
 assertEqual(stored.annotation, length(viewGet(vw, 'annotation', 1)));
@@ -152,14 +152,14 @@ vw=loadMeanMap(vw);
 
 % map
 tmp       =  viewGet(vw, 'map');
-assertEqual(stored.map, nanmean(tmp{1}(:)));
+assertAlmostEqual(stored.map, nanmean(tmp{1}(:)));
 
 % scanmap
 tmp       =  viewGet(vw, 'scanmap');
-assertEqual(stored.scanmap, nanmean(tmp(:)));
+assertAlmostEqual(stored.scanmap, nanmean(tmp(:)));
 
 % mapwin
-assertEqual(stored.mapwin, viewGet(vw, 'mapwin'));
+assertAlmostEqual(stored.mapwin, viewGet(vw, 'mapwin'));
 
 % mapname
 assertEqual(stored.mapname, length(viewGet(vw, 'mapname')));

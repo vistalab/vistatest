@@ -19,7 +19,7 @@ function test_tSeries4D
 
 %% Initialize the key variables and data path
 % Data directory (where the mrSession file is located)
-dataDir = fullfile(mrvDataRootPath,'functional','vwfaLoc');
+dataDir = fullfile(mrvDataRootPath,'functional','mrBOLD_01');
 
 %% Retain original directory, change to data directory
 curDir = pwd;

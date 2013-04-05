@@ -20,14 +20,14 @@ function test_normalizedMeanMapFromInplane
 
 %% Initialize the key variables and data path
 % Data directory (where the mrSession file is located)
-dataDir = fullfile(mrvDataRootPath,'functional','vwfaLoc');
+dataDir = fullfile(mrvDataRootPath,'functional','mrBOLD_01');
 
 % This is the validation file
 vFile = fullfile(mrvDataRootPath,'validate','normalizedMeanMapFromInplane');
 storedmeanMap = load(vFile);
 
 % These are the items we storedCorAnal in the validation file
-%
+% 
 % val.dim   = size(map);
 % val.mn    = nanmean(map(:));
 % val.max   = max(map(:));
