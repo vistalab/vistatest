@@ -18,16 +18,12 @@ function test_detrendTSeries
 % Copyright Stanford team, mrVista, 2012
 
 
-% Seed random stream. This will be used to generate a simulated tseries.
-s = RandStream('mt19937ar','Seed',1);
-RandStream.setGlobalStream(s);
-
-% Generate a time series (300 points, with some smoothing)
-ts = single(imblur(randn(300,1), 5));
-
 % This is the validation file
 vFile = fullfile(mrvDataRootPath,'validate','detrendedTSeries');
 val = load(vFile);
+
+% we stored a time series in the validation file
+ts = val.ts;
 
 % detrend three ways
 [ts1, fit1] = detrendTSeries(ts,-1);        % linear
@@ -43,7 +39,17 @@ val = load(vFile);
 % val.ts3   = [mean(ts3)  std(ts3)  median(ts3)];
 % val.fit3  = [mean(fit3) std(fit3) median(fit3)];
 %
+%
 % save(vFile, '-struct', 'val')
+%
+% Note: this is how the random numbers for the time series were generated:
+%
+% % Seed random stream. This will be used to generate a simulated tseries.
+% s = RandStream('mt19937ar','Seed',1);
+% RandStream.setGlobalStream(s);
+%
+% % Generate a time series (300 points, with some smoothing)
+% val.ts = single(imblur(randn(300,1), 5));
 
 
 % Test that each way of detrending gives the expected answers

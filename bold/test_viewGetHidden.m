@@ -217,14 +217,14 @@ vw=loadMeanMap(vw);
 
 % map
 tmp       =  viewGet(vw, 'map');
-assertEqual(stored.map, nanmean(tmp{1}(:)));
+assertAlmostEqual(stored.map, nanmean(tmp{1}(:)));
 
 % scanmap
 tmp       =  viewGet(vw, 'scanmap');
-assertEqual(stored.scanmap, nanmean(tmp(:)));
+assertAlmostEqual(stored.scanmap, nanmean(tmp(:)));
 
 % mapwin
-assertEqual(stored.mapwin, viewGet(vw, 'mapwin'));
+assertAlmostEqual(stored.mapwin, viewGet(vw, 'mapwin'));
 
 % mapname
 assertEqual(stored.mapname, length(viewGet(vw, 'mapname')));
