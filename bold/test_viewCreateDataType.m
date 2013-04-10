@@ -1,10 +1,10 @@
-function test_viewGetHidden
-%Validate calls to viewGet in the hidden inplane view. 
+function test_viewCreateDataType
+%Test the creation of a new data type
 %
-%   test_viewGetHidden()
+%   test_viewCreateDataType()
 %
 % 
-% Tests: intiHiddenInplane, viewSet, viewGet
+% Tests: intiHiddenInplane, averageTSeries, dtGet
 %
 % INPUTS
 %  No inputs
@@ -12,24 +12,17 @@ function test_viewGetHidden
 % RETURNS
 %  No returns
 %
-% Example: test_viewGetHidden()
+% Example: test_viewCreateDataType()
 %
-% See also MRVTEST TEST_VIEWGETINPLANE
+% See also MRVTEST TEST_VIEWCREATEDATATYPE
 %
-% Copyright Stanford team, mrVista, 2012
+% Copyright Stanford team, mrVista, 2013
 %
 %
 %   To make life simple, we would like a number (or numbers) returned from
 %   every call. Hence for calls that return text or cell arrays, we
 %   calculate some simple statistic like the length of the array.
 %
-%   Some calls to viewGet, such as 'current scan' and 'current slice' can
-%   change if the user has saved preferences with these values. This can
-%   happen surreptitously if vista prefs are set to always save preferences
-%   upon closing a session. Therefore, we first set the value of these
-%   fields before proceeding to the viewGets.  For fields such as 'subject'
-%   or 'number of frames' which will not change, we do not use a viewSet.
-
 
 % Initialize the key variables and data path
 
@@ -72,7 +65,7 @@ save('dataTYPE_backup','dataTYPES');
 vw = averageTSeries(vw, [1 2], typeName,'New Data Type');
 
 dtNum = length(dataTYPES);
-
+nScans = dtGet(dataTYPES(dtNum),'N Scans');
 
 %Now that we have created all of the necessary data, we can do the actual
 %tests:
@@ -81,25 +74,25 @@ try
 
     assertEqual(stored.name, dtGet(dataTYPES(dtNum),'Name'));
     
-    assertEqual(stored.annotation, dtGet(dataTYPES(dtNum),'Annotation', 1));
+    assertEqual(stored.annotation, dtGet(dataTYPES(dtNum),'Annotation', nScans));
     
-    assertEqual(stored.nFrames, dtGet(dataTYPES(dtNum),'nFrames', 1));
+    assertEqual(stored.nFrames, dtGet(dataTYPES(dtNum),'nFrames', nScans));
     
-    assertEqual(stored.framePeriod, dtGet(dataTYPES(dtNum),'Frame Period', 1));
+    assertEqual(stored.framePeriod, dtGet(dataTYPES(dtNum),'Frame Period', nScans));
     
-    assertEqual(stored.numSlices, length(dtGet(dataTYPES(dtNum),'slices', 1)));
+    assertEqual(stored.numSlices, length(dtGet(dataTYPES(dtNum),'slices', nScans)));
     
     assertEqual(stored.numScans, dtGet(dataTYPES(dtNum),'N Scans'));
     
-    assertEqual(stored.PfileName, dtGet(dataTYPES(dtNum),'Pfile Name', 1));
+    assertEqual(stored.PfileName, dtGet(dataTYPES(dtNum),'Pfile Name', nScans));
     
-    assertEqual(stored.cropSize, dtGet(dataTYPES(dtNum),'Crop Size', 1));
+    assertEqual(stored.cropSize, dtGet(dataTYPES(dtNum),'Crop Size', nScans));
     
     assertEqual(stored.blockedAnalysisParams, dtGet(dataTYPES(dtNum),'Blocked Analysis Params'));
     
     assertEqual(stored.eventAnalysisParams, dtGet(dataTYPES(dtNum),'Event Analysis Params'));
     
-catch
+catch errThrown
     
     %Even though we failed, we need to clean up:
     load('dataTYPE_backup');
@@ -107,7 +100,7 @@ catch
     rmdir(fullfile(dataDir,'Inplane',typeName),'s');
     
     %Now pass through the error:
-    rethrow(exception);
+    rethrow(errThrown);
     
 end
 
