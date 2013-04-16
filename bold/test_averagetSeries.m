@@ -1,9 +1,9 @@
-function test_viewCreateDataType
-%Test the creation of a new data type
+function test_averagetSeries
+%Test averagetSeries as well as the creation of a new data type
 %
-%   test_viewCreateDataType()
+%   test_averagetSeries()
 %
-% 
+%
 % Tests: intiHiddenInplane, averageTSeries, dtGet
 %
 % INPUTS
@@ -12,7 +12,7 @@ function test_viewCreateDataType
 % RETURNS
 %  No returns
 %
-% Example: test_viewCreateDataType()
+% Example: test_averagetSeries()
 %
 % See also MRVTEST TEST_VIEWCREATEDATATYPE
 %
@@ -30,6 +30,7 @@ function test_viewCreateDataType
 dataDir = fullfile(mrvDataRootPath,'functional','mrBOLD_01');
 
 % This is the validation file
+% TODO: change the name of the file
 vFile = fullfile(mrvDataRootPath,'validate','viewCreateDataType');
 stored = load(vFile);
 
@@ -45,7 +46,7 @@ stored = load(vFile);
 % stored.cropSize = dtGet(dataTYPES(dtNum),'Crop Size',1);
 % stored.blockedAnalysisParams = dtGet(dataTYPES(dtNum),'Blocked Analysis Params');
 % stored.eventAnalysisParams = dtGet(dataTYPES(dtNum),'Event Analysis Params');
-% 
+%
 % save(vFile, '-struct',  'stored')
 
 
@@ -70,43 +71,25 @@ nScans = dtGet(dataTYPES(dtNum),'N Scans');
 %Now that we have created all of the necessary data, we can do the actual
 %tests:
 
-try
+assertEqual(stored.name, dtGet(dataTYPES(dtNum),'Name'));
 
-    assertEqual(stored.name, dtGet(dataTYPES(dtNum),'Name'));
-    
-    assertEqual(stored.annotation, dtGet(dataTYPES(dtNum),'Annotation', nScans));
-    
-    assertEqual(stored.nFrames, dtGet(dataTYPES(dtNum),'nFrames', nScans));
-    
-    assertEqual(stored.framePeriod, dtGet(dataTYPES(dtNum),'Frame Period', nScans));
-    
-    assertEqual(stored.numSlices, length(dtGet(dataTYPES(dtNum),'slices', nScans)));
-    
-    assertEqual(stored.numScans, dtGet(dataTYPES(dtNum),'N Scans'));
-    
-    assertEqual(stored.PfileName, dtGet(dataTYPES(dtNum),'Pfile Name', nScans));
-    
-    assertEqual(stored.cropSize, dtGet(dataTYPES(dtNum),'Crop Size', nScans));
-    
-    assertEqual(stored.blockedAnalysisParams, dtGet(dataTYPES(dtNum),'Blocked Analysis Params'));
-    
-    assertEqual(stored.eventAnalysisParams, dtGet(dataTYPES(dtNum),'Event Analysis Params'));
-    
-catch errThrown
-    
-    %Even though we failed, we need to clean up:
-    load('dataTYPE_backup');
-    saveSession;
-    rmdir(fullfile(dataDir,'Inplane',typeName),'s');
-    
-    %Now pass through the error:
-    rethrow(errThrown);
-    
-end
+assertEqual(stored.annotation, dtGet(dataTYPES(dtNum),'Annotation', nScans));
 
-%Clean up afterwards
-load('dataTYPE_backup');
-saveSession;
-rmdir(fullfile(dataDir,'Inplane',typeName),'s');
+assertEqual(stored.nFrames, dtGet(dataTYPES(dtNum),'nFrames', nScans));
+
+assertEqual(stored.framePeriod, dtGet(dataTYPES(dtNum),'Frame Period', nScans));
+
+assertEqual(stored.numSlices, length(dtGet(dataTYPES(dtNum),'slices', nScans)));
+
+assertEqual(stored.numScans, dtGet(dataTYPES(dtNum),'N Scans'));
+
+assertEqual(stored.PfileName, dtGet(dataTYPES(dtNum),'Pfile Name', nScans));
+
+assertEqual(stored.cropSize, dtGet(dataTYPES(dtNum),'Crop Size', nScans));
+
+assertEqual(stored.blockedAnalysisParams, dtGet(dataTYPES(dtNum),'Blocked Analysis Params'));
+
+assertEqual(stored.eventAnalysisParams, dtGet(dataTYPES(dtNum),'Event Analysis Params'));
+
 
 cd(curDir);
