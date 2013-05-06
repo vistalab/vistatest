@@ -54,5 +54,4 @@ assertEqual(niftiGet(nii,'Phase Dim'),phaseDim);
 assertEqual(niftiGet(nii,'Freq Dim'),freqDim);
 assertEqual(niftiGet(nii,'Slice Dim'),sliceDim);
 
-end
-
+mrvCleanWorkspace;

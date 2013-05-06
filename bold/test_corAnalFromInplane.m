@@ -81,5 +81,6 @@ assertElementsAlmostEqual(storedCorAnal.ampmax, max(ampSeries));
 
 assertElementsAlmostEqual(storedCorAnal.phmax, max(phSeries));
 
+mrvCleanWorkspace;
 
 %% End Script

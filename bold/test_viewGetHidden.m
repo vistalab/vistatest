@@ -99,6 +99,8 @@ cd(dataDir);
 vw = initHiddenInplane; 
 mrGlobals;
 
+cd(curDir)
+
 %% Set data structure properties:
 vw = viewSet(vw, 'current dt', 1); 
 vw = viewSet(vw, 'current scan', 1); 
@@ -235,7 +237,7 @@ assertEqual(stored.mapunits, length(viewGet(vw, 'mapunits')));
 % map clip (empty in hidden view)
 assertEqual(stored.mapclip, viewGet(vw, 'mapclip'));
 
-cd(curDir)
+mrvCleanWorkspace;
 
 %% NYI
 

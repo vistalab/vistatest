@@ -34,6 +34,10 @@ cd(dataDir);
 %% Get view structure:
 vw = mrVista('Inplane');
 mrGlobals;
+
+% Move back to original directory
+cd(curDir)
+
 %% Check some fields in the view structure
 assertEqual(viewGet(vw, 'view type'), 'Inplane')
 
@@ -173,8 +177,6 @@ assertEqual(stored.mapunits, length(viewGet(vw, 'mapunits')));
 close(viewGet(vw, 'figure number'))
 
 mrvCleanWorkspace;
-
-cd(curDir)
 
 
 
