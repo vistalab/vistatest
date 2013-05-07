@@ -19,7 +19,7 @@ function test_xformInplaneToVolume
 
 %% Initialize the key variables and data path
 % Data directory (where the mrSession file is located)
-dataDir = fullfile(mrvDataRootPath,'functional','prfInplane');
+dataDir = fullfile(mrvDataRootPath,'functional','mrBOLD_01');
 
 % This is the validation file
 vFile = fullfile(mrvDataRootPath,'validate','ipToVolumeData');
@@ -33,6 +33,9 @@ val = load(vFile);
 % val.mapdim     = size(map);
 % val.mapmed     = nanmedian(map);
 % val.mapsample  = map(1000);
+% val.tSdim     = size(tSeries);
+% val.tSmed     = nanmedian(nanmedian(tSeries));
+% val.tSsample  = tSeries(1000);
 %
 % save(vFile, '-struct', 'val')
 
@@ -61,25 +64,35 @@ ip = loadMeanMap(ip);
 %% Transform data to VOLUME view
 vol = ip2volParMap( ip, vol, scan, [], 'linear', 1);
 vol = ip2volCorAnal(ip, vol, scan, -1);
+vol = ip2volTSeries(ip, vol, scan);
 
 co  = viewGet(vol, 'scan coherence', scan);
 map = viewGet(vol, 'scan map', scan);
+tSeries = loadtSeries(vol, scan, 1); %We can hardcode slice since gray view only has 1 slice
 
 %% Go home
-cd(curDir)
+cd(curDir);
 
 %% Validate..
 
 % check the dimensions of coherence map and mean map
 assertEqual(val.codim, size(co));
 assertEqual(val.mapdim, size(map));
+assertEqual(val.tSdim, size(tSeries));
 
 % check the median value of the coherence map and mean map
 assertElementsAlmostEqual(val.comed,nanmedian(co));
 assertElementsAlmostEqual(val.mapmed,nanmedian(map));
+assertElementsAlmostEqual(val.tSmed,nanmedian(nanmedian(tSeries)));
 
 % check the values of the mean map and coherence map for an arbitrary voxel
 % (to make sure the sequence is correct)
 assertElementsAlmostEqual(val.cosample, co(1000));
 assertElementsAlmostEqual(val.mapsample, map(1000));
+assertElementsAlmostEqual(val.tSsample, tSeries(1000));
+
+
+%% Cleanup
+
+mrvCleanWorkspace;
 
