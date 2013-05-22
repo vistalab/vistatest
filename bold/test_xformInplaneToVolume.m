@@ -3,7 +3,8 @@ function test_xformInplaneToVolume
 %
 %  test_xformInplaneToVolume()
 % 
-% Tests: initHiddenGray, loadMeanMap, loadCorAnal, ip2volParMap, ip2volCorAnal
+% Tests: initHiddenGray, loadMeanMap, loadCorAnal, ip2volParMap, 
+% ip2volCorAnal, ip2volTSeries
 %
 % INPUTS
 %  No inputs
