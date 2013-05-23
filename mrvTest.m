@@ -45,6 +45,7 @@ end
 
 % Run the tests, return whether or not they passed: 
 OK = runtests(test_dir, '-logfile',logfile, '-verbose');
+OK = runtests('test_CleanUpSVN', '-verbose');
 
 fid = fopen(logfile,'a+');
 fprintf(fid, '-----------------------------------------\n');

@@ -92,4 +92,6 @@ assertElementsAlmostEqual(val.rawMd,median(d.raw.tSeries));
 assertElementsAlmostEqual(val.rawMx,max(d.raw.tSeries));
 assertElementsAlmostEqual(val.rawMin,min(d.raw.tSeries));
 
-return
+%% Clear workspace
+
+mrvCleanWorkspace;

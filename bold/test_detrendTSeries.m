@@ -60,3 +60,5 @@ assertAlmostEqual(val.ts3, [mean(ts3)  std(ts3)  median(ts3)]);
 assertAlmostEqual(val.fit1, [mean(fit1) std(fit1) median(fit1)]);
 assertAlmostEqual(val.fit2, [mean(fit2) std(fit2) median(fit2)]);
 assertAlmostEqual(val.fit3, [mean(fit3) std(fit3) median(fit3)]);
+
+mrvCleanWorkspace;
