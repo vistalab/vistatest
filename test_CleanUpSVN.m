@@ -29,6 +29,8 @@ if isunix || ismac
     
     cd(curDir);
 else
-    warning('Could not revert svn to previous version. Ensure that there are no changes made.');
+    warning(['If you are running Windows, you will need to manually ' ...
+        'revert all of the changes yourself, as well as delete unversioned ' ...
+        'files. ' char(10) 'Please make sure to do that before your next run of mrvTest.']);
 end
 
