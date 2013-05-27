@@ -72,6 +72,6 @@ assertElementsAlmostEqual(storedmeanMap.med, median(map(:)));
 
 %% End Script
 
-
+mrvCleanWorkspace;
 
 

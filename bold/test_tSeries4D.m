@@ -54,12 +54,14 @@ storedTSeries = load(vFile);
 % Get back to the testing directory: 
 cd(curDir)
 
-
 assertEqual(storedTSeries.dim, size(tSeries));
 
 assertAlmostEqual(storedTSeries.mn, mean(double(tSeries(:))), 1e-10);
 
 assertAlmostEqual(storedTSeries.sd, std(double(tSeries(:))), 1e-10);
+
+
+mrvCleanWorkspace;
 
 %% End Script
 

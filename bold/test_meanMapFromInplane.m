@@ -58,6 +58,7 @@ map = viewGet(vw, 'map');
 map = map{1};
 
 cd(curDir)
+
 assertElementsAlmostEqual(storedmeanMap.dim, size(map));
 
 assertElementsAlmostEqual(storedmeanMap.mn,nanmean(map(:)));
@@ -69,8 +70,6 @@ assertElementsAlmostEqual(storedmeanMap.min, min(map(:)));
 assertElementsAlmostEqual(storedmeanMap.med, median(map(:)));
 
 
-%% End Script
-
-
+mrvCleanWorkspace;
 
 

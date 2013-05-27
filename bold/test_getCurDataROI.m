@@ -56,7 +56,7 @@ vw = loadROI(vw, 'LV1.mat');
 
 vw = loadCorAnal(vw);
 
-[co inds] = getCurDataROI(vw, 'co', scan);
+[co, inds] = getCurDataROI(vw, 'co', scan);
 
 %% Go home
 cd(curDir)
@@ -75,3 +75,4 @@ assertElementsAlmostEqual(storedROIdata.comn,nanmean(co));
 assertElementsAlmostEqual(storedROIdata.cosample, co(100));
 assertEqual(storedROIdata.indssample, inds(100));
 
+mrvCleanWorkspace;
