@@ -88,9 +88,9 @@ for scanNumber = 1:length(params.functionals)
     
     val = niftiGet(epi_nii{scanNumber},'Dim');
     % Number of TRs:
-    assertEqual(func(scanNumber).nFrames, val(end));
+    assertEqual(func(scanNumber).nFrames, val(end) - params.keepFrames(scanNumber, 1));
     % also  in dataTYPES:
-    assertEqual(dt.scanParams(scanNumber).nFrames, val(end));
+    assertEqual(dt.scanParams(scanNumber).nFrames, val(end) - params.keepFrames(scanNumber, 1));
     
     % Inplane dimensions:
     assertEqual(func(scanNumber).fullSize, niftiGet(epi_nii{scanNumber},'Slice Dims'));
