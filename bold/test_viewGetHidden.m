@@ -47,8 +47,8 @@ stored = load(vFile);
 % [pth, tmp]  = fileparts(viewGet(vw, 'Home Directory')); %#ok<ASGLU>\
 % stored.homedir        = length(tmp);
 % stored.sessionName    = length(viewGet(vw, 'session name'));
-% stored.subject        = length(viewGet(vw, 'subject'))
-% stored.name           = length(viewGet(vw, 'name'))
+% stored.subject        = length(viewGet(vw, 'subject'));
+% stored.name           = length(viewGet(vw, 'name'));
 % stored.annotation = length(viewGet(vw, 'annotation', 1));
 % stored.annotations = numel(viewGet(vw, 'annotations')); 
 % stored.viewtype = length(viewGet(vw, 'View Type'));
@@ -60,6 +60,7 @@ stored = load(vFile);
 % stored.dtname = length(viewGet(vw, 'dt name'));
 % stored.curdt = viewGet(vw, 'current dt');
 % stored.dtstruct = numel(fieldnames(viewGet(vw, 'dtstruct')));
+% vw = loadCorAnal(vw);
 % tmp       =  viewGet(vw, 'coherence');
 % stored.coherence = nanmean(tmp{1}(:));
 % tmp       =  viewGet(vw, 'scanco');
@@ -88,6 +89,7 @@ stored = load(vFile);
 % stored.mapname = length(viewGet(vw, 'mapname'));
 % stored.mapunits = length(viewGet(vw, 'mapunits'));
 % stored.mapclip = viewGet(vw, 'mapclip');
+% 
 % save(vFile, '-struct',  'stored')
 
 
