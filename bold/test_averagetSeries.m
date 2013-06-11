@@ -83,7 +83,7 @@ assertEqual(stored.numSlices, length(dtGet(dataTYPES(dtNum),'slices', nScans)));
 
 assertEqual(stored.numScans, dtGet(dataTYPES(dtNum),'N Scans'));
 
-assertEqual(stored.PfileName, dtGet(dataTYPES(dtNum),'Pfile Name', nScans));
+% assertEqual(stored.PfileName, dtGet(dataTYPES(dtNum),'Pfile Name', nScans));
 
 assertEqual(stored.cropSize, dtGet(dataTYPES(dtNum),'Crop Size', nScans));
 

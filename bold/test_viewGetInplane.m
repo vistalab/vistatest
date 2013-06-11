@@ -150,9 +150,8 @@ assertEqual(stored.phasewin, viewGet(vw, 'phasewin'));
 assertEqual(stored.twparams, viewGet(vw, 'twparams'));
 
 % map properties
-% scan = 1; forceSave = -1; % -1 = don't save at all
-% vw = computeMeanMap(vw, scan, forceSave);
-vw=loadMeanMap(vw);
+vw = loadMeanMap(vw);
+vw = viewSet(vw, 'map window', [0 5000]);
 
 % map
 tmp       =  viewGet(vw, 'map');
