@@ -45,7 +45,7 @@ params.sessionDir = sess_path;
 
 % Specify some optional parameters
 params.vAnatomy = anat_file;
-params.keepFrames = [3 -1; 3 -1]; %Dropped first 3 frames, kept remaining
+params.keepFrames = [3 -1; 3 96]; %Dropped first 3 frames, kept remaining
 params.subject = 'Test Subject 01';
 params.annotations = {'Scan 1', 'Scan 2'};
 params.coParams{1} = coParamsDefault;
