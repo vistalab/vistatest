@@ -1,7 +1,7 @@
 The vistatest repository contains code to validate functionality of the vistasfoft tools. The vistatest repository has two dependencies:
 
-(1) vistasoft: https://github.com/vistalab/vistasoft
-(2) vistadata: http://white.stanford.edu/newlm/index.php/Vistadata
+(1) vistasoft: https://github.com/vistalab/vistasoft <br>
+(2) vistadata: http://white.stanford.edu/newlm/index.php/Vistadata <br>
 
 Core functionality of vistatest is based on Matlab's x-unit test suite (http://www.mathworks.com/matlabcentral/fileexchange/22846-matlab-xunit-test-framework). This is not a dependency because the necessary code is included in vistatest.
 
