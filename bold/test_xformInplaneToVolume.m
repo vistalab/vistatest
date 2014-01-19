@@ -35,7 +35,6 @@ val = load(vFile);
 % val.mapmed     = nanmedian(map);
 % val.mapsample  = map(1000);
 % val.tSdim     = size(tSeries);
-% val.tSmed     = nanmedian(nanmedian(tSeries));
 % val.tSsample  = tSeries(1000);
 %
 % save(vFile, '-struct', 'val')
@@ -84,13 +83,16 @@ assertEqual(val.tSdim, size(tSeries));
 % check the median value of the coherence map and mean map
 assertElementsAlmostEqual(val.comed,nanmedian(co));
 assertElementsAlmostEqual(val.mapmed,nanmedian(map));
-assertElementsAlmostEqual(val.tSmed,nanmedian(nanmedian(tSeries)));
+
 
 % check the values of the mean map and coherence map for an arbitrary voxel
 % (to make sure the sequence is correct)
 assertElementsAlmostEqual(val.cosample, co(1000));
 assertElementsAlmostEqual(val.mapsample, map(1000));
+
+% check the values of the time series for the max and an arbitrary voxel
 assertElementsAlmostEqual(val.tSsample, tSeries(1000));
+assertElementsAlmostEqual(val.tSmax,nanmax(tSeries(:)));
 
 
 %% Cleanup
