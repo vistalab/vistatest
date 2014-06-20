@@ -96,6 +96,8 @@ assertElementsAlmostEqual(val.tSmax,nanmax(tSeries(:)));
 
 
 %% Cleanup
+% clean up vistadata repository because this test script wrote new data
+test_CleanUpSVN
 
 mrvCleanWorkspace;
 

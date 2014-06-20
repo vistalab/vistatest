@@ -83,4 +83,5 @@ assertElementsAlmostEqual(storedGLM.contrastMed,  median(contrastMap(:)));
 assertElementsAlmostEqual(storedGLM.contrastMax,  nanmax(contrastMap(:)));
 assertElementsAlmostEqual(storedGLM.contrastVoc,  contrastMap(40,40,10));
 
-
+%% Clean up vistadata repository because this test script wrote new data
+test_CleanUpSVN

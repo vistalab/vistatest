@@ -91,5 +91,7 @@ assertEqual(stored.blockedAnalysisParams, dtGet(dataTYPES(dtNum),'Blocked Analys
 
 assertEqual(stored.eventAnalysisParams, dtGet(dataTYPES(dtNum),'Event Analysis Params'));
 
+% clean up vistadata repository because this test script wrote new data
+test_CleanUpSVN
 
 cd(curDir);

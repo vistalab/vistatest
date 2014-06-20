@@ -93,7 +93,8 @@ assertEqual(stored.numSlices, length(dtGet(dataTYPES(dtNum),'slices', nScans)));
 % Check that the new dataTYPE got the proper number of scans
 assertEqual(stored.numScans, dtGet(dataTYPES(dtNum),'N Scans'));
 
-
+% clean up vistadata repository because this test script wrote new data
+test_CleanUpSVN
 
 
 

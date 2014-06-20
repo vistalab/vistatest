@@ -125,4 +125,7 @@ cd(currDir);
 assertEqual(viewGet(vw,'View Type'),'Inplane');
 assertEqual(viewGet(vw,'Name'),'hidden');
 
+% clean up vistadata repository because this test script wrote new data
+test_CleanUpSVN
+
 mrvCleanWorkspace;
