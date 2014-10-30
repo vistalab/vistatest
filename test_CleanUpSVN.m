@@ -25,7 +25,7 @@ if isunix || ismac
     cd(mrvDataRootPath);
     
     system('svn revert -R .');
-    system('svn status --no-ignore | grep ''^[I?]'' | cut -c 9- | while IFS= read -r f; do rm -rf "$f"; done');
+    system(fullfile(mrvTestRootPath, 'svn-cleanup.sh'))
     
     cd(curDir);
 else
