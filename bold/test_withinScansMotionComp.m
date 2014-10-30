@@ -40,6 +40,8 @@ stored = load(vFile);
 % stored.motionEstimates = motionEstimates;
 % save(vFile, '-struct',  'stored')
 
+% Relative tolerance of assertAlmostEqual
+relTol = 1e-10;
 
 % Retain original directory, change to data directory
 curDir = pwd;
@@ -69,7 +71,7 @@ motionEstimates = dtGet(dataTYPES(dtNum), 'within scan motion', scansToCorrect);
 
 
 % Now check that the motion estimates agree with stored estimates
-assertAlmostEqual(motionEstimates, stored.motionEstimates);
+assertAlmostEqual(motionEstimates, stored.motionEstimates, relTol);
 
 % Check that the new dataTYPE got the proper name
 assertEqual(typeName, dtGet(dataTYPES(dtNum),'Name'));

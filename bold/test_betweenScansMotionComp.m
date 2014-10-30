@@ -20,6 +20,9 @@ function test_betweenScansMotionComp
 %
 %
 
+% Relative tolerance of assertAlmostEqual
+relTol = 1e-10;
+
 % Initialize the key variables and data path
 
 % Data directory (where the mrSession file is located)
@@ -73,7 +76,7 @@ assertEqual(M(:,:,1), zeros(4))
 assert(~isequal(M(:,:,2), zeros(4)));
 
 % Now check that the motion estimates agree with stored estimates
-assertAlmostEqual(stored.MotionEstimates, M);
+assertAlmostEqual(stored.MotionEstimates, M, relTol);
 
 % Check that the new dataTYPE got the proper name
 assertEqual(typeName, dtGet(dataTYPES(dtNum),'Name'));
