@@ -15,8 +15,8 @@ function rootPath=mrvTestRootPath()
 %
 % mrVista Team
 
-rootPath=which('mrvDataRootPath');
+rootPath = which('mrvTestRootPath');
 
-[rootPath,fName,ext]=fileparts(rootPath);
+rootPath = fileparts(rootPath);
 
 return
