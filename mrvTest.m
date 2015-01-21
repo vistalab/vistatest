@@ -8,10 +8,10 @@ function logfile = mrvTest(logfile)
 % ---------
 % logfile: string, optional  
 %  
-% Full path to logfile that will be produced by the test-suite. The file will
-% be saved in the pwd, unless another directory is specified in the
-% file-name. Defaults to a generic file-name with a time-stamp, generated in
-% the pwd. 
+% Full path to logfile that will be produced by the test-suite. The file
+% will be saved in the system tempdir, unless another directory is
+% specified in the file-name. Defaults to a generic file-name with a
+% time-stamp, generated in the pwd.
 %
 % Returns
 % -------
@@ -39,7 +39,7 @@ end
 
 %% Output file if no input provided
 if notDefined('logfile')
-    logfile = fullfile(pwd, sprintf('mrvTestLog_%s.txt', ...
+    logfile = fullfile(tempdir, sprintf('mrvTestLog_%s.txt', ...
         datestr(now, 'yyyy_mm_dd_HH-MM-SS')));
 end
 
