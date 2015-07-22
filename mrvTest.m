@@ -1,33 +1,42 @@
-function logfile = mrvTest(logfile)
+function logfile = mrvTest(logfile, whichTests, extended)
 % Run the vistasoft test-suite. This function wraps matlab_xunit's `runtest` 
 %
 % We might create separate processing for bold, diffusion, anatomy.
 % This one runs them all.
 %
-% Paramters 
+% Inputs
 % ---------
-% logfile: string, optional  
-%  
-% Full path to logfile that will be produced by the test-suite. The file
-% will be saved in the system tempdir, unless another directory is
-% specified in the file-name. Defaults to a generic file-name with a
-% time-stamp, generated in the pwd.
+%   logfile:    Full path to logfile that will be produced by the test-suite. 
+%               The file will be saved in the system tempdir, unless another
+%               directory is specified in the file-name. Defaults to a
+%               generic file-name with a time-stamp, generated in the pwd.
 %
-% Returns
+%   whichTests: string specificying which functions to test. Either 'bold',
+%               'diffusion', 'anatomy' [default = 'bold']
+%
+%   extended:   boolean. If true, then run extended tests as well as core
+%               tests. Extended tests take more time. [deault = false]
+%
+%
+% Outputs
 % -------
 % logfile: string
 % 
-% Same as the parameter.  
-%
+% Examples
+%   mrvTest();
+%   mrvTest([], 'bold');
+%   mrvTest('~/myLogFile.m', 'bold', true);
+
 % Jon (c) Copyright Stanford team, mrVista, 2011 
 
-%%
-curdir = pwd;
+%% Check inputs and paths
+if notDefined('logfile')
+    logfile = fullfile(tempdir, sprintf('mrvTestLog_%s.txt', ...
+        datestr(now, 'yyyy_mm_dd_HH-MM-SS')));
+end
 
-%% Get information regarding the software environmnet
-env  = mrvGetEvironment();
-
-test_dir = strcat(fileparts(which('mrvTest.m')),'/bold'); 
+if notDefined('whichTests'), whichTests = 'bold'; end
+if notDefined('extended'), extended = false; end
 
 % Check whether vistadata is on the path
 if isempty(which('mrvDataRootPath')) || ~exist(mrvDataRootPath, 'dir'),
@@ -35,12 +44,19 @@ if isempty(which('mrvDataRootPath')) || ~exist(mrvDataRootPath, 'dir'),
        '[%s] Need vistdata repository on the path.\nSee: %s', ...
        mfilename, 'http://white.stanford.edu/newlm/index.php/Vistadata')
 end
+%%
+curdir = pwd;
 
+%% Get information regarding the software environmnet
+env  = mrvGetEvironment();
 
-%% Output file if no input provided
-if notDefined('logfile')
-    logfile = fullfile(tempdir, sprintf('mrvTestLog_%s.txt', ...
-        datestr(now, 'yyyy_mm_dd_HH-MM-SS')));
+test_dir = fullfile(mrvTestRootPath, whichTests, 'core'); 
+
+% if extended test requested, we will pass in two dirs in a cell array
+if extended,
+    test_dir1 = test_dir;
+    test_dir2 = fullfile(mrvTestRootPath, whichTests, 'extended'); 
+    test_dir = {test_dir1, test_dir2};
 end
 
 % Run the tests, return whether or not they passed: 
