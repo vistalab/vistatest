@@ -60,6 +60,9 @@ nSmooth         = 1;
 % compute the within scan motion, and return the view structure 
 vw = motionCompSelScan(vw, typeName, scansToCorrect, baseFrame, nSmooth, baseScan);
 
+% close the graph window created by motionCompSelScan
+close(gcf)
+
 %Now that we have created the necessary data, we can do the actual tests.
 dtNum  = length(dataTYPES);
 vw     = viewSet(vw, 'current dt', dtNum);
