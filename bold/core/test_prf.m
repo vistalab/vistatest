@@ -57,7 +57,7 @@ vw = viewSet(vw, 'Current DataType', dataType);
 vw = ip2volTSeries(ip,vw,1,'linear'); clear ip;
 
 %% calculate the pRF model
-vw = loadROI(vw, 'RV1.mat', 1, [], 0, 1);
+vw = loadROI(vw, 'RV1.mat', 3, [], 0, 1);
 vw = rmMain(vw,'RV1.mat' ,1,'min pRF size', 0.5, 'max pRF size', 3,...
     'number of sigmas', 6, 'outerlimit', 0, ...
     'coarse sample', false, 'decimate', 0);
